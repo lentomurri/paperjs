@@ -17,17 +17,13 @@
   var red = 0.1;
 
 
-  for (var i = 1; i < 12; i++) {
+  for (var x = 50; x < 1000; x+=50) {
     //alternative: the variable could be played with the for loop itself.
     //create x by changing basic value;
-    var x = xstart * i * xspacing;
-    red *= i;
-    for (var j = 1; j < 10; j++) {
+    for (var y= 50; y < 800; y+=50) {
       //create y;
-      var y = ystart * j * yspacing;
       //new circle created and coordinates applied
-      console.log(red);
-      var fillColor = new Color(red, red, 0.8, 0.5);
+      var fillColor = new Color(x/1000, 0.3, 0.8, 0.5);
       new Path.Circle(new Point(x,y), 10).fillColor = fillColor;
     }
 
