@@ -6,28 +6,42 @@
   <title>Animation Project</title>
   <link rel="stylesheet" href="css/master.css">
   <script type="text/javascript" src="js/back.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.1/howler.core.min.js">
+  </script>
   <script type="text/javascript" src="js/paper-full.js"></script>
 
   <script type="text/paperscript" canvas="myCanvas" >
+  var circles = [];
 
   function onKeyDown(event) {
-    if (event.type = "keydown") {
       //create random variables to make circle appear in any position;
+      //use in-built function Point.random
+      //use view.size.width to see actual width of the visible part
       var maxPoint = new Point(view.size.width, view.size.height);
       var point = maxPoint * Point.random() +1;
-      console.log(point);
+      //randomize colors
       var red = Math.random() * 1;
       var green = Math.random() * 1;
       var blue = Math.random() * 1;
-      var size = Math.random() * 100 +1;
+      var size = Math.random() * 400 +1;
 
       //create new Circle on pressure of a key;
       var fillColor = new Color(red,green,blue, 0.8);
-      var create = new Path.Circle(point, size).fillColor = fillColor;
-  }
+      //creates new circles with random points and sizes
+      var create = new Path.Circle(point, size);
+      create.fillColor = fillColor;
+      //pushes new circles in the array
+      circles.push(create);
+
   }
 
-
+  function onFrame(event) {
+    for (var i = 0; i < circles.length; i++) {
+      //applies colour changes and scaling to the circles
+      circles[i].fillColor.hue += 1;
+      circles[i].scale(.95);
+    }
+  }
 </script>
 </head>
 
