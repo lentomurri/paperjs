@@ -7,32 +7,27 @@
   <link rel="stylesheet" href="css/master.css">
   <script type="text/javascript" src="js/back.js"></script>
   <script type="text/javascript" src="js/paper-full.js"></script>
-  <!-- important! Names in canvas need to match to canvas id! -->
 
   <script type="text/paperscript" canvas="myCanvas" >
-  var xstart = 50;
-  var ystart = 50;
-  var xspacing = 2;
-  var yspacing = 1.5;
-  var red = 0.1;
 
+  function onKeyDown(event) {
+    if (event.type = "keydown") {
+      //create random variables to make circle appear in any position;
+      var maxPoint = new Point(view.size.width, view.size.height);
+      var point = maxPoint * Point.random() +1;
+      console.log(point);
+      var red = Math.random() * 1;
+      var green = Math.random() * 1;
+      var blue = Math.random() * 1;
+      var size = Math.random() * 100 +1;
 
-  for (var i = 1; i < 12; i++) {
-    //alternative: the variable could be played with the for loop itself.
-    //create x by changing basic value;
-    var x = xstart * i * xspacing;
-    red *= i;
-    for (var j = 1; j < 10; j++) {
-      //create y;
-      var y = ystart * j * yspacing;
-      //new circle created and coordinates applied
-      console.log(red);
-      var fillColor = new Color(red, red, 0.8, 0.5);
-      new Path.Circle(new Point(x,y), 10).fillColor = fillColor;
-    }
-
+      //create new Circle on pressure of a key;
+      var fillColor = new Color(red,green,blue, 0.8);
+      var create = new Path.Circle(point, size).fillColor = fillColor;
   }
-  
+  }
+
+
 </script>
 </head>
 
