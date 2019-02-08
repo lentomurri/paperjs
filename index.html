@@ -10,8 +10,69 @@
   </script>
   <script type="text/javascript" src="js/paper-full.js"></script>
 
-  <script type="text/paperscript" canvas="myCanvas" >
-  var circles = [];
+  <script type="text/paperscript" canvas="myCanvas">
+    var circles = [];
+  var keydata = {
+    0: {
+      sound: new Howl({
+        src: ['https://raw.githubusercontent.com/jonobr1/Neuronal-Synchrony/master/assets/A/bubbles.mp3']
+      })
+    },
+    1: {
+      sound: new Howl({
+        src: ['https://raw.githubusercontent.com/jonobr1/Neuronal-Synchrony/master/assets/A/squiggle.mp3']
+      })
+    },
+    2: {
+      sound: new Howl({
+        src: ['https://raw.githubusercontent.com/jonobr1/Neuronal-Synchrony/master/assets/A/prism-1.mp3']
+      })
+    },
+    3: {
+      sound: new Howl({
+        src: ['https://raw.githubusercontent.com/jonobr1/Neuronal-Synchrony/master/assets/A/moon.mp3']
+      })
+    },
+    4: {
+      sound: new Howl({
+        src: ['https://raw.githubusercontent.com/jonobr1/Neuronal-Synchrony/master/assets/A/veil.mp3']
+      })
+    },
+    5: {
+      sound: new Howl({
+        src: ['https://raw.githubusercontent.com/jonobr1/Neuronal-Synchrony/master/assets/C/ufo.mp3']
+      })
+    }
+  }
+
+  function randomise() {
+    var random = Math.random() * 1;
+    return random;
+  }
+
+  function whichSound() {
+    switch(event.key)
+    {
+      case "a": case "b": case "c": case "d": case "e":
+        keydata[0].sound.play();
+        break;
+      case "f": case "g": case "h": case "i": case "j":
+        keydata[1].sound.play();
+        break;
+      case "k": case "l": case "m": case "n": case "o":
+        keydata[2].sound.play();
+        break;
+      case "p": case "q": case "r": case "s": case "t":
+        keydata[3].sound.play();
+        break;
+      case "u": case "v": case "w": case "x": case "y": case "z":
+        keydata[4].sound.play();
+        break;
+      default:
+        keydata[5].sound.play();
+        break;
+    }
+  }
 
   function onKeyDown(event) {
       //create random variables to make circle appear in any position;
@@ -20,9 +81,10 @@
       var maxPoint = new Point(view.size.width, view.size.height);
       var point = maxPoint * Point.random() +1;
       //randomize colors
-      var red = Math.random() * 1;
-      var green = Math.random() * 1;
-      var blue = Math.random() * 1;
+      var red = randomise();
+      var green = randomise();
+      var blue = randomise();
+      //random circle size generated
       var size = Math.random() * 400 +1;
 
       //create new Circle on pressure of a key;
@@ -32,14 +94,14 @@
       create.fillColor = fillColor;
       //pushes new circles in the array
       circles.push(create);
-
+      whichSound();
   }
 
   function onFrame(event) {
     for (var i = 0; i < circles.length; i++) {
       //applies colour changes and scaling to the circles
       circles[i].fillColor.hue += 1;
-      circles[i].scale(.95);
+      circles[i].scale(.9);
     }
   }
 </script>
